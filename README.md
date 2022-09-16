@@ -7,11 +7,26 @@
 ```
 ```
 ---
-## Using node with windows 
-### Set up WSL
 
-- install WSL [src](https://docs.microsoft.com/en-us/windows/wsl/install)
+## Set up WSL
 
+### Previous WSL installation 
+- if you had directories that used a prior WSL installation, you may have fo fix file permission 
+- DrvFs is a filesystem plugin to WSL that was designed to support interop between WSL and the Windows filesystem.
+see:
+- [mount/unmount](https://codeyarns.com/tech/2020-06-17-how-to-mount-and-unmount-on-wsl.html#gsc.tab=0)
+  - e.g. `sudo umount /mntd/`
+  - `sudo mount -t drvfs D: /mnt/d`
+  - WSL: `sudo umount /mnt/c sudo mount -t drvfs C: /mnt/c -o metadata`
+- [wsl fix](https://www.turek.dev/posts/fix-wsl-file-permissions/),
+- [microsoft's chmod/chown improvements](https://devblogs.microsoft.com/commandline/chmod-chown-wsl-improvements/),
+- [fmask/umask](https://askubuntu.com/questions/429848/dmask-and-fmask-mount-options)
+  - It works as the normal octal permissions but subtracted from 7, and use the absolute value. for instance if you want to set the permissions to 0777 you will need to set it 0000 in the umask (e.g. umask=0000), if you want to set it to 0755 you will set it to 0022 :
+
+
+### install WSL [src](https://docs.microsoft.com/en-us/windows/wsl/install)
+
+install wsl: `wsl --install -d Ubuntu-20.04`
 
 Make sure you set wsl to version 2
 - `wsl -l -v`
@@ -28,7 +43,10 @@ Update the kernel package [more info](https://docs.microsoft.com/en-us/windows/w
 
 [download update](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
 
+### WSL User setup [see](https://docs.microsoft.com/en-us/windows/wsl/setup/environment#set-up-your-linux-user-info)
 
+`wsl -u root`
+`passwd <usernam>`
 
 ### Integrating VSCode with WSL
 
@@ -89,8 +107,17 @@ Install Node: https://nodejs.org/en/download/
 
 ---
 
+### Set node version to use
+You may get access denied; on elevated powershell run:
+- `nvm install <version>`
+- `nvm use <version>`
+- `nvm current`
+
+### Set up TypeScript
+- Typescript requires nodes
 
 ## Create React project
+If WSL Eperm symlink use nvm-windows
 
 ### Install Eslint
 `npm install eslint` or globally `npm install --global eslint`
@@ -103,7 +130,7 @@ Enable all `eslint-plugin-react-hooks` rules for your project.
 
 `npm install eslint-plugin-react-hooks`
 
-Activate format on save
+### Activate format on save
 
 Ctrl+Shift+P -> Preferences: open user settings JSON,
 add
@@ -127,6 +154,7 @@ Go into project root:
 `npm init -y`
 `npm install babel-cli@6 babel-preset-react-app@3`
 
+### Create react project
 - `npx create-react-app my-app`
 - `npm start`
 

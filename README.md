@@ -1,44 +1,17 @@
 # Setting up Web Dev Environment
 
-## Create React project
 
-- requires node, WSL, vscode, web browser, if you want nvm: linux
 
-```
-```
-#### Install Node
-
-Recommended:
-You should get a node version manager. Node is a fragmented ecosystem. You need multiple versions to work with.
-
-### Get nvm (Node Version Manager) [here](https://github.com/nvm-sh/nvm)
-- note: only works on linux platforms
-- on windows, you can use WSL (Windows Subsystem for Linux)
-
-### nvm for windows
-- install nvm-windows [here](https://github.com/coreybutler/nvm-windows/releases)
-- manual installation add:
-`settings.txt`
+- requires node, , vscode, web browser, if you want nvm: linux/WSL
 
 ```
-root: C:\path\to\nvm\root
-path: C:\path\to\nodejs
 ```
-to `C:\`
-
-```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-```
-
-Standalone Node (not recommended)
-Install Node: https://nodejs.org/en/download/
-
 ---
-### Using node with windows 
-### Set up WSL and VSCode
+## Using node with windows 
+### Set up WSL
 
 - install WSL [src](https://docs.microsoft.com/en-us/windows/wsl/install)
-- set up code for wsl [src](https://code.visualstudio.com/docs/remote/wsl)
+
 
 Make sure you set wsl to version 2
 - `wsl -l -v`
@@ -54,6 +27,70 @@ Switch to version 2
 Update the kernel package [more info](https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 
 [download update](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+
+
+
+### Integrating VSCode with WSL
+
+Set up code for wsl [src](https://code.visualstudio.com/docs/remote/wsl)
+
+- `wsl`
+- `code .` if there is an error: add code to path
+
+### Add code to path
+
+in wsl: `nano ~/.bashrc`
+
+- add this to end of ~/.bashrc:
+`export PATH="$PATH/path/to/vscode"`
+
+- NOTE: change the path to where your vscode installation is located
+- save (ctrl-o)
+- exit (ctrl-x)
+
+Code should automatically install the wsl remote server
+
+if successful you should see this:
+
+![vscode-wsl-success](readme-img/wsl-code-integration-00.PNG)
+
+---
+
+## Install nvm / Node
+
+Recommended:
+You should get a node version manager. Node is a fragmented ecosystem. You need multiple versions to work with.
+
+
+
+### nvm for windows if you can't use WSL
+- install nvm-windows [here](https://github.com/coreybutler/nvm-windows/releases)
+- IF using manual installation add:
+
+`settings.txt`
+```
+root: C:\path\to\nvm\root
+path: C:\path\to\nodejs
+```
+to `C:\`
+
+---
+
+### Get nvm (Node Version Manager) [here](https://github.com/nvm-sh/nvm)
+- note: only works on linux platforms
+- on windows, you can use WSL (Windows Subsystem for Linux)
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+Standalone Node (not recommended)
+Install Node: https://nodejs.org/en/download/
+
+---
+
+
+## Create React project
 
 ### Install Eslint
 `npm install eslint` or globally `npm install --global eslint`
